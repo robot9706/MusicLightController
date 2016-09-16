@@ -74,6 +74,7 @@
       <DependentUpon>StupScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Misc\ConfigFileLayout.lay" />
+    <None Include="Misc\serial_pwm.ino" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
