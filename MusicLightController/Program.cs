@@ -16,7 +16,7 @@ namespace MusicLightController
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StupScreen());
+            Application.Run(new SetupScreen());
         }
     }
 }

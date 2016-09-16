@@ -53,11 +53,11 @@
     <Compile Include="FMODWrapper\fmod_dsp.cs" />
     <Compile Include="FMODWrapper\fmod_errors.cs" />
     <Compile Include="FMODWrapper\fmod_memoryinfo.cs" />
-    <Compile Include="StupScreen.cs">
+    <Compile Include="SetupScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StupScreen.Designer.cs">
-      <DependentUpon>StupScreen.cs</DependentUpon>
+    <Compile Include="SetupScreen.Designer.cs">
+      <DependentUpon>SetupScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +70,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StupScreen.resx">
-      <DependentUpon>StupScreen.cs</DependentUpon>
+    <EmbeddedResource Include="SetupScreen.resx">
+      <DependentUpon>SetupScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Misc\ConfigFileLayout.lay" />
     <None Include="Misc\serial_pwm.ino" />

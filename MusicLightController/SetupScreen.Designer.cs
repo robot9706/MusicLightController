@@ -1,6 +1,6 @@
 ﻿namespace MusicLightController
 {
-    partial class StupScreen
+    partial class SetupScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StupScreen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupScreen));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbComs = new System.Windows.Forms.ComboBox();
             this.btnCOMrefresh = new System.Windows.Forms.Button();

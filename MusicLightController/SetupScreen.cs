@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace MusicLightController
 {
-    public partial class StupScreen : Form
+    public partial class SetupScreen : Form
     {
         #region Vars
         private ConfigFile _config;
@@ -47,7 +47,7 @@ namespace MusicLightController
         #endregion
 
         #region UI
-        public StupScreen()
+        public SetupScreen()
         {
             InitializeComponent();
         }
@@ -748,10 +748,10 @@ namespace MusicLightController
                 }
                 catch (Exception ex)
                 {
-                    if (_runSoundProcessor)
-                    {
-                        MessageBox.Show("Music LED controller - FMOD error!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //if (_runSoundProcessor)
+                    //{
+                    //    MessageBox.Show("Music LED controller - FMOD error!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //}
                 }
             }
         }
