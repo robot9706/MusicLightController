@@ -31,51 +31,51 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupScreen));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbComs = new System.Windows.Forms.ComboBox();
-            this.btnCOMrefresh = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbBaud = new System.Windows.Forms.ComboBox();
-            this.cpr = new System.Windows.Forms.Label();
-            this.btnSaveCOM = new System.Windows.Forms.Button();
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.lblSerialStatusText = new System.Windows.Forms.Label();
             this.lblSerialStatus = new System.Windows.Forms.Label();
+            this.lblSerialStatusText = new System.Windows.Forms.Label();
+            this.btnSaveCOM = new System.Windows.Forms.Button();
+            this.cbBaud = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCOMrefresh = new System.Windows.Forms.Button();
+            this.cbComs = new System.Windows.Forms.ComboBox();
+            this.cpr = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.trackBright = new System.Windows.Forms.TrackBar();
-            this.trackBSlope = new System.Windows.Forms.TrackBar();
-            this.trackMidSlope = new System.Windows.Forms.TrackBar();
-            this.lblBrightness = new System.Windows.Forms.Label();
-            this.lblBSlope = new System.Windows.Forms.Label();
-            this.lblMSlope = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbInput = new System.Windows.Forms.ComboBox();
-            this.cbOutput = new System.Windows.Forms.ComboBox();
-            this.cbOutputMode = new System.Windows.Forms.ComboBox();
-            this.cbInToOut = new System.Windows.Forms.CheckBox();
             this.lblSamples = new System.Windows.Forms.Label();
             this.trackSamples = new System.Windows.Forms.TrackBar();
             this.label10 = new System.Windows.Forms.Label();
-            this.pbVis = new System.Windows.Forms.PictureBox();
+            this.lblMSlope = new System.Windows.Forms.Label();
+            this.lblBSlope = new System.Windows.Forms.Label();
+            this.lblBrightness = new System.Windows.Forms.Label();
+            this.trackMidSlope = new System.Windows.Forms.TrackBar();
+            this.trackBSlope = new System.Windows.Forms.TrackBar();
+            this.trackBright = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbVis = new System.Windows.Forms.CheckBox();
+            this.pbVis = new System.Windows.Forms.PictureBox();
+            this.cbInToOut = new System.Windows.Forms.CheckBox();
+            this.cbOutputMode = new System.Windows.Forms.ComboBox();
+            this.cbOutput = new System.Windows.Forms.ComboBox();
+            this.cbInput = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.trayMenu.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBright)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBSlope)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackMidSlope)).BeginInit();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackMidSlope)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBSlope)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBright)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVis)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,43 +94,35 @@
             this.groupBox1.Size = new System.Drawing.Size(368, 220);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Communcation settings";
+            this.groupBox1.Text = "Communication settings";
             // 
-            // cbComs
+            // lblSerialStatus
             // 
-            this.cbComs.FormattingEnabled = true;
-            this.cbComs.Location = new System.Drawing.Point(100, 32);
-            this.cbComs.Name = "cbComs";
-            this.cbComs.Size = new System.Drawing.Size(241, 26);
-            this.cbComs.TabIndex = 0;
+            this.lblSerialStatus.AutoSize = true;
+            this.lblSerialStatus.Location = new System.Drawing.Point(100, 144);
+            this.lblSerialStatus.Name = "lblSerialStatus";
+            this.lblSerialStatus.Size = new System.Drawing.Size(84, 18);
+            this.lblSerialStatus.TabIndex = 7;
+            this.lblSerialStatus.Text = "Port closed";
             // 
-            // btnCOMrefresh
+            // lblSerialStatusText
             // 
-            this.btnCOMrefresh.Location = new System.Drawing.Point(100, 64);
-            this.btnCOMrefresh.Name = "btnCOMrefresh";
-            this.btnCOMrefresh.Size = new System.Drawing.Size(109, 30);
-            this.btnCOMrefresh.TabIndex = 1;
-            this.btnCOMrefresh.Text = "Refresh list";
-            this.btnCOMrefresh.UseVisualStyleBackColor = true;
-            this.btnCOMrefresh.Click += new System.EventHandler(this.btnCOMrefresh_Click);
+            this.lblSerialStatusText.AutoSize = true;
+            this.lblSerialStatusText.Location = new System.Drawing.Point(40, 144);
+            this.lblSerialStatusText.Name = "lblSerialStatusText";
+            this.lblSerialStatusText.Size = new System.Drawing.Size(54, 18);
+            this.lblSerialStatusText.TabIndex = 6;
+            this.lblSerialStatusText.Text = "Status:";
             // 
-            // label1
+            // btnSaveCOM
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 18);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "COM port:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 18);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Baud rate:";
+            this.btnSaveCOM.Location = new System.Drawing.Point(202, 174);
+            this.btnSaveCOM.Name = "btnSaveCOM";
+            this.btnSaveCOM.Size = new System.Drawing.Size(139, 30);
+            this.btnSaveCOM.TabIndex = 5;
+            this.btnSaveCOM.Text = "Save and apply";
+            this.btnSaveCOM.UseVisualStyleBackColor = true;
+            this.btnSaveCOM.Click += new System.EventHandler(this.btnSaveCOM_Click);
             // 
             // cbBaud
             // 
@@ -156,6 +148,42 @@
             this.cbBaud.Size = new System.Drawing.Size(241, 26);
             this.cbBaud.TabIndex = 4;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 18);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Baud rate:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 18);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "COM port:";
+            // 
+            // btnCOMrefresh
+            // 
+            this.btnCOMrefresh.Location = new System.Drawing.Point(100, 64);
+            this.btnCOMrefresh.Name = "btnCOMrefresh";
+            this.btnCOMrefresh.Size = new System.Drawing.Size(109, 30);
+            this.btnCOMrefresh.TabIndex = 1;
+            this.btnCOMrefresh.Text = "Refresh list";
+            this.btnCOMrefresh.UseVisualStyleBackColor = true;
+            this.btnCOMrefresh.Click += new System.EventHandler(this.btnCOMrefresh_Click);
+            // 
+            // cbComs
+            // 
+            this.cbComs.FormattingEnabled = true;
+            this.cbComs.Location = new System.Drawing.Point(100, 32);
+            this.cbComs.Name = "cbComs";
+            this.cbComs.Size = new System.Drawing.Size(241, 26);
+            this.cbComs.TabIndex = 0;
+            // 
             // cpr
             // 
             this.cpr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -166,16 +194,6 @@
             this.cpr.TabIndex = 1;
             this.cpr.Text = "robot9706 @ 2016";
             // 
-            // btnSaveCOM
-            // 
-            this.btnSaveCOM.Location = new System.Drawing.Point(202, 174);
-            this.btnSaveCOM.Name = "btnSaveCOM";
-            this.btnSaveCOM.Size = new System.Drawing.Size(139, 30);
-            this.btnSaveCOM.TabIndex = 5;
-            this.btnSaveCOM.Text = "Save and apply";
-            this.btnSaveCOM.UseVisualStyleBackColor = true;
-            this.btnSaveCOM.Click += new System.EventHandler(this.btnSaveCOM_Click);
-            // 
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.trayMenu;
@@ -183,24 +201,6 @@
             this.notifyIcon.Text = "LED music controller";
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
-            // 
-            // lblSerialStatusText
-            // 
-            this.lblSerialStatusText.AutoSize = true;
-            this.lblSerialStatusText.Location = new System.Drawing.Point(40, 144);
-            this.lblSerialStatusText.Name = "lblSerialStatusText";
-            this.lblSerialStatusText.Size = new System.Drawing.Size(54, 18);
-            this.lblSerialStatusText.TabIndex = 6;
-            this.lblSerialStatusText.Text = "Status:";
-            // 
-            // lblSerialStatus
-            // 
-            this.lblSerialStatus.AutoSize = true;
-            this.lblSerialStatus.Location = new System.Drawing.Point(100, 144);
-            this.lblSerialStatus.Name = "lblSerialStatus";
-            this.lblSerialStatus.Size = new System.Drawing.Size(84, 18);
-            this.lblSerialStatus.TabIndex = 7;
-            this.lblSerialStatus.Text = "Port closed";
             // 
             // trayMenu
             // 
@@ -210,6 +210,13 @@
             this.exitToolStripMenuItem});
             this.trayMenu.Name = "trayMenu";
             this.trayMenu.Size = new System.Drawing.Size(117, 54);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -222,13 +229,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // groupBox2
             // 
@@ -250,177 +250,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LED settings";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Brightness:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 18);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Bass slope value:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 126);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 18);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Mid slope value:";
-            // 
-            // trackBright
-            // 
-            this.trackBright.Location = new System.Drawing.Point(142, 32);
-            this.trackBright.Maximum = 1000;
-            this.trackBright.Name = "trackBright";
-            this.trackBright.Size = new System.Drawing.Size(240, 45);
-            this.trackBright.TabIndex = 3;
-            this.trackBright.TickFrequency = 50;
-            this.trackBright.Scroll += new System.EventHandler(this.trackBright_Scroll);
-            // 
-            // trackBSlope
-            // 
-            this.trackBSlope.Location = new System.Drawing.Point(142, 80);
-            this.trackBSlope.Maximum = 1000;
-            this.trackBSlope.Name = "trackBSlope";
-            this.trackBSlope.Size = new System.Drawing.Size(240, 45);
-            this.trackBSlope.TabIndex = 4;
-            this.trackBSlope.TickFrequency = 50;
-            this.trackBSlope.Scroll += new System.EventHandler(this.trackBSlope_Scroll);
-            // 
-            // trackMidSlope
-            // 
-            this.trackMidSlope.Location = new System.Drawing.Point(142, 126);
-            this.trackMidSlope.Maximum = 1000;
-            this.trackMidSlope.Name = "trackMidSlope";
-            this.trackMidSlope.Size = new System.Drawing.Size(240, 45);
-            this.trackMidSlope.TabIndex = 5;
-            this.trackMidSlope.TickFrequency = 50;
-            this.trackMidSlope.Scroll += new System.EventHandler(this.trackMidSlope_Scroll);
-            // 
-            // lblBrightness
-            // 
-            this.lblBrightness.AutoSize = true;
-            this.lblBrightness.Location = new System.Drawing.Point(388, 35);
-            this.lblBrightness.Name = "lblBrightness";
-            this.lblBrightness.Size = new System.Drawing.Size(45, 18);
-            this.lblBrightness.TabIndex = 6;
-            this.lblBrightness.Text = "100%";
-            // 
-            // lblBSlope
-            // 
-            this.lblBSlope.AutoSize = true;
-            this.lblBSlope.Location = new System.Drawing.Point(388, 80);
-            this.lblBSlope.Name = "lblBSlope";
-            this.lblBSlope.Size = new System.Drawing.Size(36, 18);
-            this.lblBSlope.TabIndex = 7;
-            this.lblBSlope.Text = "0.74";
-            // 
-            // lblMSlope
-            // 
-            this.lblMSlope.AutoSize = true;
-            this.lblMSlope.Location = new System.Drawing.Point(388, 126);
-            this.lblMSlope.Name = "lblMSlope";
-            this.lblMSlope.Size = new System.Drawing.Size(36, 18);
-            this.lblMSlope.TabIndex = 8;
-            this.lblMSlope.Text = "0.74";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbVis);
-            this.groupBox3.Controls.Add(this.pbVis);
-            this.groupBox3.Controls.Add(this.cbInToOut);
-            this.groupBox3.Controls.Add(this.cbOutputMode);
-            this.groupBox3.Controls.Add(this.cbOutput);
-            this.groupBox3.Controls.Add(this.cbInput);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(12, 238);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(847, 216);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Sound processor";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(72, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 18);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Input:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(59, 67);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 18);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Output:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 100);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(98, 18);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Output mode:";
-            // 
-            // cbInput
-            // 
-            this.cbInput.FormattingEnabled = true;
-            this.cbInput.Location = new System.Drawing.Point(121, 30);
-            this.cbInput.Name = "cbInput";
-            this.cbInput.Size = new System.Drawing.Size(241, 26);
-            this.cbInput.TabIndex = 8;
-            this.cbInput.SelectedIndexChanged += new System.EventHandler(this.cbInput_SelectedIndexChanged);
-            // 
-            // cbOutput
-            // 
-            this.cbOutput.FormattingEnabled = true;
-            this.cbOutput.Location = new System.Drawing.Point(121, 63);
-            this.cbOutput.Name = "cbOutput";
-            this.cbOutput.Size = new System.Drawing.Size(241, 26);
-            this.cbOutput.TabIndex = 9;
-            this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
-            // 
-            // cbOutputMode
-            // 
-            this.cbOutputMode.FormattingEnabled = true;
-            this.cbOutputMode.Items.AddRange(new object[] {
-            "DirectSound",
-            "Windows Multimedia WaveOut",
-            "ASIO"});
-            this.cbOutputMode.Location = new System.Drawing.Point(121, 95);
-            this.cbOutputMode.Name = "cbOutputMode";
-            this.cbOutputMode.Size = new System.Drawing.Size(241, 26);
-            this.cbOutputMode.TabIndex = 10;
-            this.cbOutputMode.SelectedIndexChanged += new System.EventHandler(this.cbOutputMode_SelectedIndexChanged);
-            // 
-            // cbInToOut
-            // 
-            this.cbInToOut.AutoSize = true;
-            this.cbInToOut.Location = new System.Drawing.Point(121, 136);
-            this.cbInToOut.Name = "cbInToOut";
-            this.cbInToOut.Size = new System.Drawing.Size(164, 22);
-            this.cbInToOut.TabIndex = 11;
-            this.cbInToOut.Text = "Mirror input to output";
-            this.cbInToOut.UseVisualStyleBackColor = true;
-            this.cbInToOut.CheckedChanged += new System.EventHandler(this.cbInToOut_CheckedChanged);
             // 
             // lblSamples
             // 
@@ -452,14 +281,107 @@
             this.label10.TabIndex = 9;
             this.label10.Text = "Samples (/s):";
             // 
-            // pbVis
+            // lblMSlope
             // 
-            this.pbVis.BackColor = System.Drawing.Color.White;
-            this.pbVis.Location = new System.Drawing.Point(374, 30);
-            this.pbVis.Name = "pbVis";
-            this.pbVis.Size = new System.Drawing.Size(467, 152);
-            this.pbVis.TabIndex = 12;
-            this.pbVis.TabStop = false;
+            this.lblMSlope.AutoSize = true;
+            this.lblMSlope.Location = new System.Drawing.Point(388, 126);
+            this.lblMSlope.Name = "lblMSlope";
+            this.lblMSlope.Size = new System.Drawing.Size(36, 18);
+            this.lblMSlope.TabIndex = 8;
+            this.lblMSlope.Text = "0.74";
+            // 
+            // lblBSlope
+            // 
+            this.lblBSlope.AutoSize = true;
+            this.lblBSlope.Location = new System.Drawing.Point(388, 80);
+            this.lblBSlope.Name = "lblBSlope";
+            this.lblBSlope.Size = new System.Drawing.Size(36, 18);
+            this.lblBSlope.TabIndex = 7;
+            this.lblBSlope.Text = "0.74";
+            // 
+            // lblBrightness
+            // 
+            this.lblBrightness.AutoSize = true;
+            this.lblBrightness.Location = new System.Drawing.Point(388, 35);
+            this.lblBrightness.Name = "lblBrightness";
+            this.lblBrightness.Size = new System.Drawing.Size(45, 18);
+            this.lblBrightness.TabIndex = 6;
+            this.lblBrightness.Text = "100%";
+            // 
+            // trackMidSlope
+            // 
+            this.trackMidSlope.Location = new System.Drawing.Point(142, 126);
+            this.trackMidSlope.Maximum = 1000;
+            this.trackMidSlope.Name = "trackMidSlope";
+            this.trackMidSlope.Size = new System.Drawing.Size(240, 45);
+            this.trackMidSlope.TabIndex = 5;
+            this.trackMidSlope.TickFrequency = 50;
+            this.trackMidSlope.Scroll += new System.EventHandler(this.trackMidSlope_Scroll);
+            // 
+            // trackBSlope
+            // 
+            this.trackBSlope.Location = new System.Drawing.Point(142, 80);
+            this.trackBSlope.Maximum = 1000;
+            this.trackBSlope.Name = "trackBSlope";
+            this.trackBSlope.Size = new System.Drawing.Size(240, 45);
+            this.trackBSlope.TabIndex = 4;
+            this.trackBSlope.TickFrequency = 50;
+            this.trackBSlope.Scroll += new System.EventHandler(this.trackBSlope_Scroll);
+            // 
+            // trackBright
+            // 
+            this.trackBright.Location = new System.Drawing.Point(142, 32);
+            this.trackBright.Maximum = 1000;
+            this.trackBright.Name = "trackBright";
+            this.trackBright.Size = new System.Drawing.Size(240, 45);
+            this.trackBright.TabIndex = 3;
+            this.trackBright.TickFrequency = 50;
+            this.trackBright.Scroll += new System.EventHandler(this.trackBright_Scroll);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(22, 126);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 18);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Mid slope value:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 18);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Bass slope value:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(54, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Brightness:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbVis);
+            this.groupBox3.Controls.Add(this.pbVis);
+            this.groupBox3.Controls.Add(this.cbInToOut);
+            this.groupBox3.Controls.Add(this.cbOutputMode);
+            this.groupBox3.Controls.Add(this.cbOutput);
+            this.groupBox3.Controls.Add(this.cbInput);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Location = new System.Drawing.Point(12, 238);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(847, 216);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Sound processor";
             // 
             // cbVis
             // 
@@ -472,7 +394,85 @@
             this.cbVis.UseVisualStyleBackColor = true;
             this.cbVis.CheckedChanged += new System.EventHandler(this.cbVis_CheckedChanged);
             // 
-            // StupScreen
+            // pbVis
+            // 
+            this.pbVis.BackColor = System.Drawing.Color.White;
+            this.pbVis.Location = new System.Drawing.Point(374, 30);
+            this.pbVis.Name = "pbVis";
+            this.pbVis.Size = new System.Drawing.Size(467, 152);
+            this.pbVis.TabIndex = 12;
+            this.pbVis.TabStop = false;
+            // 
+            // cbInToOut
+            // 
+            this.cbInToOut.AutoSize = true;
+            this.cbInToOut.Location = new System.Drawing.Point(121, 136);
+            this.cbInToOut.Name = "cbInToOut";
+            this.cbInToOut.Size = new System.Drawing.Size(164, 22);
+            this.cbInToOut.TabIndex = 11;
+            this.cbInToOut.Text = "Mirror input to output";
+            this.cbInToOut.UseVisualStyleBackColor = true;
+            this.cbInToOut.CheckedChanged += new System.EventHandler(this.cbInToOut_CheckedChanged);
+            // 
+            // cbOutputMode
+            // 
+            this.cbOutputMode.FormattingEnabled = true;
+            this.cbOutputMode.Items.AddRange(new object[] {
+            "DirectSound",
+            "Windows Multimedia WaveOut",
+            "ASIO"});
+            this.cbOutputMode.Location = new System.Drawing.Point(121, 95);
+            this.cbOutputMode.Name = "cbOutputMode";
+            this.cbOutputMode.Size = new System.Drawing.Size(241, 26);
+            this.cbOutputMode.TabIndex = 10;
+            this.cbOutputMode.SelectedIndexChanged += new System.EventHandler(this.cbOutputMode_SelectedIndexChanged);
+            // 
+            // cbOutput
+            // 
+            this.cbOutput.FormattingEnabled = true;
+            this.cbOutput.Location = new System.Drawing.Point(121, 63);
+            this.cbOutput.Name = "cbOutput";
+            this.cbOutput.Size = new System.Drawing.Size(241, 26);
+            this.cbOutput.TabIndex = 9;
+            this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
+            // 
+            // cbInput
+            // 
+            this.cbInput.FormattingEnabled = true;
+            this.cbInput.Location = new System.Drawing.Point(121, 30);
+            this.cbInput.Name = "cbInput";
+            this.cbInput.Size = new System.Drawing.Size(241, 26);
+            this.cbInput.TabIndex = 8;
+            this.cbInput.SelectedIndexChanged += new System.EventHandler(this.cbInput_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 100);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(98, 18);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Output mode:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(59, 67);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 18);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Output:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(72, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 18);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Input:";
+            // 
+            // SetupScreen
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(868, 489);
@@ -484,7 +484,7 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "StupScreen";
+            this.Name = "SetupScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controller setup";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StupScreen_FormClosing);
@@ -494,12 +494,12 @@
             this.trayMenu.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBright)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBSlope)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackSamples)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMidSlope)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBSlope)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBright)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackSamples)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
