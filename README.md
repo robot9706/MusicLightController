@@ -6,5 +6,7 @@ Used for a project where I recycled an old LED light to make some music controll
 
 The sketch and compiled code are in the "Misc" folder: serial_pwm.ino and serial_pwm.ino.hex.
 
+The sounds are recorded realtime from the soundcard output and analysed realtime (with ~50ms delay to the LEDs) usind FMOD.
+
 # License
 Use the way you want, just give credit.
