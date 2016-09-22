@@ -522,15 +522,16 @@ namespace MusicLightController
                 FMOD.SOUND_FORMAT format = FMOD.SOUND_FORMAT.NONE;
                 FMOD.DSP_RESAMPLER resampler = FMOD.DSP_RESAMPLER.MAX;
                 int outputfreq = 0;
-                if (!ERRCHECK(system.getSoftwareFormat(ref outputfreq, ref format, ref temp, ref temp, ref resampler, ref temp)))
+                int numout = 0;
+                if (!ERRCHECK(system.getSoftwareFormat(ref outputfreq, ref format, ref numout, ref temp, ref resampler, ref temp)))
                     return;
 
                 FMOD.CREATESOUNDEXINFO exinfo = new FMOD.CREATESOUNDEXINFO();
                 exinfo.cbsize = Marshal.SizeOf(exinfo);
-                exinfo.numchannels = 2;
-                exinfo.format = FMOD.SOUND_FORMAT.PCM16;
-                exinfo.defaultfrequency = OUTPUTRATE;
-                exinfo.length = (uint)((exinfo.defaultfrequency * 2 * exinfo.numchannels * 5) * 0.65f);
+                exinfo.numchannels = numout; //2;
+                exinfo.format = format; //FMOD.SOUND_FORMAT.PCM16;
+                exinfo.defaultfrequency = outputfreq; //OUTPUTRATE;
+                exinfo.length = (uint)((exinfo.defaultfrequency * 2 * exinfo.numchannels * 5) * 2.00f); //0.65f
 
                 if (!ERRCHECK(system.createSound((string)null, (FMOD.MODE._2D | FMOD.MODE.SOFTWARE | FMOD.MODE.OPENUSER | FMOD.MODE.LOOP_NORMAL), ref exinfo, ref sound)))
                     return;
@@ -666,8 +667,8 @@ namespace MusicLightController
         private void DoProcessSound()
         {
             //Pre calculate some values
-            int midStart = (int)((float)SPECTRUMSIZE * 0.01f);
-            int midEnd = (int)(SPECTRUMSIZE * 0.65f);
+            int midStart = (int)((float)SPECTRUMSIZE * 0.0125f); //0.01f
+            int midEnd = (int)(SPECTRUMSIZE * 0.75f); //0.65f
 
             float left_sum, right_sum, mulpos, bassSum, soundSum;
 
@@ -732,8 +733,8 @@ namespace MusicLightController
                             if (_serialValid && _serial != null)
                             {
                                 //Convert the sound values into byte ranges...
-                                int bByte = Clamp((int)((bassSum * 250.0f) * _config.Brightness), 255, 0);
-                                int sByte = Clamp((int)((soundSum * 250.0f) * _config.Brightness), 255, 0);
+                                int bByte = Clamp((int)((bassSum * 250.0f) * _config.Brightness), 254, 0);
+                                int sByte = Clamp((int)((soundSum * 250.0f) * _config.Brightness), 254, 0);
 
                                 _serial.Write(new byte[] { (byte)(bByte), (byte)(sByte) }, 0, 2); //... and output them to the LED controller
                             }
