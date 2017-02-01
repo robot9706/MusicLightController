@@ -11,8 +11,6 @@ void setup() {
   Serial.begin(115200);
 }
 
-int val = 0;
-
 void loop() {
   if(Serial.available() > 1){
     analogWrite(pwm, Serial.read());
