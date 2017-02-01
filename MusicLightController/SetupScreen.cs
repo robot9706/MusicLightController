@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MetroFramework;
+using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 
 namespace MusicLightController
 {
-    public partial class SetupScreen : Form
+    public partial class SetupScreen : MetroForm
     {
         #region Vars
         private ConfigFile _config;
@@ -77,6 +79,8 @@ namespace MusicLightController
                 _config.OutputName = string.Empty;
                 _config.OutputDriverIndex = -1;
                 _config.OutputDriverName = string.Empty;
+                _config.MetroTheme = (byte)MetroThemeStyle.Light;
+                _config.MetroColor = (byte)MetroColorStyle.Yellow;
 
                 _config.Write(_configFile);
             }
@@ -109,6 +113,21 @@ namespace MusicLightController
                     }
                 }
 
+                //Setup the style settings
+                foreach(MetroThemeStyle v in (MetroThemeStyle[])Enum.GetValues(typeof(MetroThemeStyle)))
+                {
+                    cbMetroStyle.Items.Add(v);
+                    if (v == (MetroThemeStyle)_config.MetroTheme)
+                        cbMetroStyle.SelectedIndex = cbMetroStyle.Items.Count - 1;
+                }
+
+                foreach (MetroColorStyle v in (MetroColorStyle[])Enum.GetValues(typeof(MetroColorStyle)))
+                {
+                    cbMetroColor.Items.Add(v);
+                    if (v == (MetroColorStyle)_config.MetroColor)
+                        cbMetroColor.SelectedIndex = cbMetroColor.Items.Count - 1;
+                }
+
                 //Revert to the default baud rate if nothing is selected (shouldn't be possible)
                 if (cbBaud.SelectedIndex < 0)
                 {
@@ -116,8 +135,8 @@ namespace MusicLightController
                 }
 
                 //Load trackbar values
-                trackBright.Value = (int)Math.Floor(_config.Brightness * (float)trackBright.Maximum);
-                trackBSlope.Value = (int)Math.Round(_config.BassSlopeValue * ((float)trackBright.Maximum / 10.0f), 2);
+                trackBrigtness.Value = (int)Math.Floor(_config.Brightness * (float)trackBrigtness.Maximum);
+                trackBassSlope.Value = (int)Math.Round(_config.BassSlopeValue * ((float)trackBassSlope.Maximum / 10.0f), 2);
                 trackMidSlope.Value = (int)Math.Round(_config.MidSlopeValue * ((float)trackMidSlope.Maximum / 10.0f), 2);
                 trackSamples.Value = _config.SamplesPerSecond;
 
@@ -126,13 +145,6 @@ namespace MusicLightController
                 lblBSlope.Text = _config.BassSlopeValue.ToString().Replace(',', '.');
                 lblMSlope.Text = _config.MidSlopeValue.ToString().Replace(',', '.');
                 lblSamples.Text = _config.SamplesPerSecond.ToString();
-
-                //Init visualization GFX
-                _visBmp = new Bitmap(pbVis.Width, pbVis.Height);
-                pbVis.Image = _visBmp;
-                _visGfx = Graphics.FromImage(_visBmp);
-                _visGfx.Clear(Color.White);
-                pbVis.Refresh();
 
                 //Load the checkbox
                 cbInToOut.Checked = _config.MirrorSound;
@@ -147,6 +159,32 @@ namespace MusicLightController
                 }
                 _fmodLoading = false;
             }
+        }
+
+        private void cbMetroStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = (MetroThemeStyle)cbMetroStyle.Items[cbMetroStyle.SelectedIndex];
+            Theme = metroStyleManager.Theme;
+            metroStyleManager.UpdateOwnerForm();
+            Refresh();
+
+            _config.MetroTheme = (byte)metroStyleManager.Theme;
+
+            //Save the config
+            _config.Write(_configFile);
+        }
+
+        private void cbMetroColor_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = (MetroColorStyle)cbMetroColor.Items[cbMetroColor.SelectedIndex];
+            Style = metroStyleManager.Style;
+            metroStyleManager.UpdateOwnerForm();
+            Refresh();
+
+            _config.MetroColor = (byte)metroStyleManager.Style;
+
+            //Save the config
+            _config.Write(_configFile);
         }
 
         private void Application_ApplicationExit(object sender, EventArgs e)
@@ -225,9 +263,6 @@ namespace MusicLightController
 
                 this.Hide();
                 this.ShowInTaskbar = false;
-
-                //Notify the user about the app running in the background
-                notifyIcon.ShowBalloonTip(2000, "Hey!", "Still running here!", ToolTipIcon.Info);
             }
         }
 
@@ -251,25 +286,25 @@ namespace MusicLightController
             settingsToolStripMenuItem_Click(sender, e); //Show the form using the settings context menu button
         }
 
-        private void trackBright_Scroll(object sender, EventArgs e)
+        private void trackBrigtness_Scroll(object sender, ScrollEventArgs e)
         {
-            _config.Brightness = trackBright.Value / (float)trackBright.Maximum;
+            _config.Brightness = trackBrigtness.Value / (float)trackBrigtness.Maximum;
             lblBrightness.Text = ((int)Math.Floor(_config.Brightness * 100.0f)).ToString() + "%";
         }
 
-        private void trackBSlope_Scroll(object sender, EventArgs e)
+        private void trackBassSlope_Scroll(object sender, ScrollEventArgs e)
         {
-            _config.BassSlopeValue = trackBSlope.Value / ((float)trackBSlope.Maximum / 10.0f);
+            _config.BassSlopeValue = trackBassSlope.Value / ((float)trackBassSlope.Maximum / 10.0f);
             lblBSlope.Text = _config.BassSlopeValue.ToString().Replace(',', '.');
         }
 
-        private void trackMidSlope_Scroll(object sender, EventArgs e)
+        private void trackMidSlope_Scroll(object sender, ScrollEventArgs e)
         {
             _config.MidSlopeValue = trackMidSlope.Value / ((float)trackMidSlope.Maximum / 10.0f);
             lblMSlope.Text = _config.MidSlopeValue.ToString().Replace(',', '.');
         }
 
-        private void trackSamples_Scroll(object sender, EventArgs e)
+        private void trackSamples_Scroll(object sender, ScrollEventArgs e)
         {
             _config.SamplesPerSecond = (ushort)trackSamples.Value;
             lblSamples.Text = _config.SamplesPerSecond.ToString();
@@ -539,7 +574,7 @@ namespace MusicLightController
                 if (!ERRCHECK(system.recordStart(cbInput.SelectedIndex, sound, true))) //Start recording the sound
                     return;
 
-                Thread.Sleep(50); //We need some time before we have enough data to analyse -> this gives some latency
+                Thread.Sleep(75); //We need some time before we have enough data to analyse -> this gives some latency
 
                 if (!ERRCHECK(system.playSound(FMOD.CHANNELINDEX.REUSE, sound, false, ref channel))) //Play the sound so we can analyse it
                     return;
@@ -728,8 +763,6 @@ namespace MusicLightController
                             bassSum = (float)Math.Pow(_prevBass, _config.BassSlopeValue);
                             soundSum = (float)Math.Pow(_prevSound, _config.MidSlopeValue);
 
-                            DataVisualize(bassSum, soundSum);
-
                             if (_serialValid && _serial != null)
                             {
                                 //Convert the sound values into byte ranges...
@@ -754,55 +787,6 @@ namespace MusicLightController
                     //    MessageBox.Show("Music LED controller - FMOD error!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //}
                 }
-            }
-        }
-        #endregion
-
-        #region Visualization
-        //Vars
-        private Bitmap _visBmp;
-        private Graphics _visGfx;
-
-        private int _visDrawX = 0;
-        private float _lastDrawB = 0.0f;
-        private float _lastDrawM = 0.0f;
-
-        //Visualization functions
-        private void cbVis_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DataVisualize(float b, float m)
-        {
-            if (!cbVis.Checked)
-                return;
-
-            if (InvokeRequired)
-            {
-                Invoke(new Action(() => DataVisualize(b, m)));
-            }
-            else
-            {
-                if (_visDrawX < pbVis.Width * 0.75f)
-                {
-                    _visGfx.DrawLine(Pens.Blue, new PointF(_visDrawX - 1, pbVis.Height - (int)(pbVis.Height * _lastDrawB)), new Point(_visDrawX, pbVis.Height - (int)(pbVis.Height * b)));
-                    _visGfx.DrawLine(Pens.Red, new PointF(_visDrawX - 1, pbVis.Height - (int)(pbVis.Height * _lastDrawM)), new Point(_visDrawX, pbVis.Height - (int)(pbVis.Height * m)));
-
-                    _visDrawX++;
-                }
-                else
-                {
-                    _visGfx.DrawImage(_visBmp, new Point(-1, 0));
-
-                    _visGfx.DrawLine(Pens.Blue, new PointF(_visDrawX, pbVis.Height - (int)(pbVis.Height * _lastDrawB)), new Point(_visDrawX + 1, pbVis.Height - (int)(pbVis.Height * b)));
-                    _visGfx.DrawLine(Pens.Red, new PointF(_visDrawX, pbVis.Height - (int)(pbVis.Height * _lastDrawM)), new Point(_visDrawX + 1, pbVis.Height - (int)(pbVis.Height * m)));
-                }
-
-                _lastDrawB = b;
-                _lastDrawM = m;
-
-                pbVis.Refresh();
             }
         }
         #endregion

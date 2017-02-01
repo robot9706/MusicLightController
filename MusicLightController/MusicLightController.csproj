@@ -36,6 +36,10 @@
     <ApplicationIcon>Misc\Icon\MusicalNote.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Misc\MetroFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +79,7 @@
     </EmbeddedResource>
     <None Include="Misc\ConfigFileLayout.lay" />
     <None Include="Misc\serial_pwm.ino" />
+    <None Include="Misc\serial_pwm.ino.hex" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,9 +98,15 @@
     <Content Include="fmodex.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MetroFramework-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Misc\Icon\MusicalNote.ico" />
     <Content Include="Misc\Icon\MusicalNote.png" />
-    <Content Include="Misc\FMOD_LICENSE.TXT" />
+    <None Include="Fmod-license.TXT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\MetroFramework.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

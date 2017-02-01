@@ -99,6 +99,20 @@ namespace MusicLightController
 			set { _MirrorSound = value;  }
 		}
 		
+		private byte _MetroTheme;
+		public byte MetroTheme
+		{
+			get { return _MetroTheme; }
+			set { _MetroTheme = value;  }
+		}
+		
+		private byte _MetroColor;
+		public byte MetroColor
+		{
+			get { return _MetroColor; }
+			set { _MetroColor = value;  }
+		}
+		
 		
 		public static ConfigFile ReadFile(string fileName)
 		{
@@ -155,6 +169,8 @@ namespace MusicLightController
 					_OutputDriverIndex = br0.ReadInt32();
 					_OutputDriverName = br0.ReadString();
 					_MirrorSound = br0.ReadBoolean();
+					_MetroTheme = br0.ReadByte();
+					_MetroColor = br0.ReadByte();
 				}
 			}
 		}
@@ -192,6 +208,8 @@ namespace MusicLightController
 					bw0.Write(_OutputDriverIndex);
 					bw0.Write(_OutputDriverName);
 					bw0.Write(_MirrorSound);
+					bw0.Write(_MetroTheme);
+					bw0.Write(_MetroColor);
 				}
 			}
 		}
