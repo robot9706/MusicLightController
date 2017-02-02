@@ -70,7 +70,7 @@
 			<!-- P2 -->
 			<a href="#p2" id="p2"><h2>Software</h2></a>
 			<p>The ATmega328 firmware is very simple, it waits for 2 bytes on the serial port and uses them to set the duty cycle of the PWM pins. The firmware can be found here: <a style="text-decoration: underline" href="https://github.com/robot9706/MusicLightController/blob/master/MusicLightController/Misc/serial_pwm.ino">INO</a> / <a style="text-decoration: underline" href = "https://github.com/robot9706/MusicLightController/blob/master/MusicLightController/Misc/serial_pwm.ino.hex">HEX</a></p>
-			<p>This is nothing for an ATmega328 running on 16MHz, so if you don't want to use all the 6 PWM pins or other GPIOs an ATTiny85 could do the job (because TX is not used on the MCU side it is not required, so 3 IO pins is enough).</p>
+			<p>This is nothing for an ATmega328 running on 16MHz, so if you don't want to use all the 6 PWM pins or other GPIOs an ATTiny85 could do the job (because TX is not used on the MCU side 3 IO pins are enough).</p>
 			<br>
 			<p>The PC software is a little more complicated. It uses the FMOD library to capture audio from an input or a soundcard and using FFT it analyses that. An average is calculated for low sounds and mid sounds which are then used to calculate PWM duty cycles for the ATmega.</p>
 			<p>Unfortunatelly there is a slight delay which is required by FMOD to make sure it always has some data to work on. As a workaround I have a secondary sound card, so everything is playing on the primary card then the software captures the audio, controlls the LEDs and outputs the audio on the secondary card which is now in sync with the LEDs (the delay moves between 10-100ms).</p>
