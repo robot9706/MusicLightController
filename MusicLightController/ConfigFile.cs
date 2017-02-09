@@ -113,6 +113,20 @@ namespace MusicLightController
 			set { _MetroColor = value;  }
 		}
 		
+		private float _BassVolume;
+		public float BassVolume
+		{
+			get { return _BassVolume; }
+			set { _BassVolume = value;  }
+		}
+		
+		private float _MidVolume;
+		public float MidVolume
+		{
+			get { return _MidVolume; }
+			set { _MidVolume = value;  }
+		}
+		
 		
 		public static ConfigFile ReadFile(string fileName)
 		{
@@ -154,7 +168,7 @@ namespace MusicLightController
 			{
 				using (BinaryReader br0 = new BinaryReader(br0_gz))
 				{
-					if (br0.ReadString() != "MCC")
+					if (br0.ReadString() != "MCC2")
 						return;
 					_COMPort = br0.ReadString();
 					_Baud = br0.ReadUInt32();
@@ -171,6 +185,8 @@ namespace MusicLightController
 					_MirrorSound = br0.ReadBoolean();
 					_MetroTheme = br0.ReadByte();
 					_MetroColor = br0.ReadByte();
+					_BassVolume = br0.ReadSingle();
+					_MidVolume = br0.ReadSingle();
 				}
 			}
 		}
@@ -194,7 +210,7 @@ namespace MusicLightController
 			{
 				using (BinaryWriter bw0 = new BinaryWriter(bw0_gz))
 				{
-					bw0.Write((string)"MCC");
+					bw0.Write((string)"MCC2");
 					bw0.Write(_COMPort);
 					bw0.Write(_Baud);
 					bw0.Write(_Brightness);
@@ -210,6 +226,8 @@ namespace MusicLightController
 					bw0.Write(_MirrorSound);
 					bw0.Write(_MetroTheme);
 					bw0.Write(_MetroColor);
+					bw0.Write(_BassVolume);
+					bw0.Write(_MidVolume);
 				}
 			}
 		}

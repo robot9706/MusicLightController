@@ -47,6 +47,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblMidVol = new MetroFramework.Controls.MetroLabel();
+            this.lblBassVol = new MetroFramework.Controls.MetroLabel();
+            this.trackMidVol = new MetroFramework.Controls.MetroTrackBar();
+            this.trackBassVol = new MetroFramework.Controls.MetroTrackBar();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.trackSamples = new MetroFramework.Controls.MetroTrackBar();
             this.trackMidSlope = new MetroFramework.Controls.MetroTrackBar();
             this.trackBassSlope = new MetroFramework.Controls.MetroTrackBar();
@@ -302,6 +308,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblMidVol);
+            this.groupBox2.Controls.Add(this.lblBassVol);
+            this.groupBox2.Controls.Add(this.trackMidVol);
+            this.groupBox2.Controls.Add(this.trackBassVol);
+            this.groupBox2.Controls.Add(this.metroLabel5);
+            this.groupBox2.Controls.Add(this.metroLabel4);
             this.groupBox2.Controls.Add(this.trackSamples);
             this.groupBox2.Controls.Add(this.trackMidSlope);
             this.groupBox2.Controls.Add(this.trackBassSlope);
@@ -322,14 +334,120 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LED settings";
             // 
+            // lblMidVol
+            // 
+            this.lblMidVol.AutoSize = true;
+            this.lblMidVol.CustomBackground = false;
+            this.lblMidVol.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.lblMidVol.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.lblMidVol.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.lblMidVol.Location = new System.Drawing.Point(386, 182);
+            this.lblMidVol.Name = "lblMidVol";
+            this.lblMidVol.Size = new System.Drawing.Size(24, 19);
+            this.lblMidVol.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lblMidVol.StyleManager = this.metroStyleManager;
+            this.lblMidVol.TabIndex = 21;
+            this.lblMidVol.Text = "1.0";
+            this.lblMidVol.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lblMidVol.UseStyleColors = false;
+            // 
+            // lblBassVol
+            // 
+            this.lblBassVol.AutoSize = true;
+            this.lblBassVol.CustomBackground = false;
+            this.lblBassVol.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.lblBassVol.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.lblBassVol.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.lblBassVol.Location = new System.Drawing.Point(386, 151);
+            this.lblBassVol.Name = "lblBassVol";
+            this.lblBassVol.Size = new System.Drawing.Size(24, 19);
+            this.lblBassVol.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lblBassVol.StyleManager = this.metroStyleManager;
+            this.lblBassVol.TabIndex = 20;
+            this.lblBassVol.Text = "1.0";
+            this.lblBassVol.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lblBassVol.UseStyleColors = false;
+            // 
+            // trackMidVol
+            // 
+            this.trackMidVol.BackColor = System.Drawing.Color.Transparent;
+            this.trackMidVol.CustomBackground = false;
+            this.trackMidVol.LargeChange = ((uint)(5u));
+            this.trackMidVol.Location = new System.Drawing.Point(129, 180);
+            this.trackMidVol.Maximum = 200;
+            this.trackMidVol.Minimum = 1;
+            this.trackMidVol.MouseWheelBarPartitions = 10;
+            this.trackMidVol.Name = "trackMidVol";
+            this.trackMidVol.Size = new System.Drawing.Size(251, 23);
+            this.trackMidVol.SmallChange = ((uint)(1u));
+            this.trackMidVol.Style = MetroFramework.MetroColorStyle.Blue;
+            this.trackMidVol.StyleManager = this.metroStyleManager;
+            this.trackMidVol.TabIndex = 19;
+            this.trackMidVol.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.trackMidVol.Value = 100;
+            this.trackMidVol.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackMidVol_Scroll);
+            // 
+            // trackBassVol
+            // 
+            this.trackBassVol.BackColor = System.Drawing.Color.Transparent;
+            this.trackBassVol.CustomBackground = false;
+            this.trackBassVol.LargeChange = ((uint)(5u));
+            this.trackBassVol.Location = new System.Drawing.Point(129, 149);
+            this.trackBassVol.Maximum = 200;
+            this.trackBassVol.Minimum = 1;
+            this.trackBassVol.MouseWheelBarPartitions = 10;
+            this.trackBassVol.Name = "trackBassVol";
+            this.trackBassVol.Size = new System.Drawing.Size(251, 23);
+            this.trackBassVol.SmallChange = ((uint)(1u));
+            this.trackBassVol.Style = MetroFramework.MetroColorStyle.Blue;
+            this.trackBassVol.StyleManager = this.metroStyleManager;
+            this.trackBassVol.TabIndex = 18;
+            this.trackBassVol.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.trackBassVol.Value = 100;
+            this.trackBassVol.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackBassVol_Scroll);
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.CustomBackground = false;
+            this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel5.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel5.Location = new System.Drawing.Point(41, 182);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(82, 19);
+            this.metroLabel5.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel5.StyleManager = this.metroStyleManager;
+            this.metroLabel5.TabIndex = 17;
+            this.metroLabel5.Text = "Mid volume:";
+            this.metroLabel5.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel5.UseStyleColors = false;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.CustomBackground = false;
+            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel4.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel4.Location = new System.Drawing.Point(39, 151);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(84, 19);
+            this.metroLabel4.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel4.StyleManager = this.metroStyleManager;
+            this.metroLabel4.TabIndex = 16;
+            this.metroLabel4.Text = "Bass volume:";
+            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel4.UseStyleColors = false;
+            // 
             // trackSamples
             // 
             this.trackSamples.BackColor = System.Drawing.Color.Transparent;
             this.trackSamples.CustomBackground = false;
             this.trackSamples.LargeChange = ((uint)(5u));
-            this.trackSamples.Location = new System.Drawing.Point(129, 152);
+            this.trackSamples.Location = new System.Drawing.Point(129, 118);
             this.trackSamples.Maximum = 100;
-            this.trackSamples.Minimum = 10;
+            this.trackSamples.Minimum = 0;
             this.trackSamples.MouseWheelBarPartitions = 10;
             this.trackSamples.Name = "trackSamples";
             this.trackSamples.Size = new System.Drawing.Size(251, 23);
@@ -346,7 +464,7 @@
             this.trackMidSlope.BackColor = System.Drawing.Color.Transparent;
             this.trackMidSlope.CustomBackground = false;
             this.trackMidSlope.LargeChange = ((uint)(5u));
-            this.trackMidSlope.Location = new System.Drawing.Point(129, 114);
+            this.trackMidSlope.Location = new System.Drawing.Point(129, 87);
             this.trackMidSlope.Maximum = 1000;
             this.trackMidSlope.Minimum = 0;
             this.trackMidSlope.MouseWheelBarPartitions = 10;
@@ -365,7 +483,7 @@
             this.trackBassSlope.BackColor = System.Drawing.Color.Transparent;
             this.trackBassSlope.CustomBackground = false;
             this.trackBassSlope.LargeChange = ((uint)(5u));
-            this.trackBassSlope.Location = new System.Drawing.Point(129, 76);
+            this.trackBassSlope.Location = new System.Drawing.Point(129, 56);
             this.trackBassSlope.Maximum = 1000;
             this.trackBassSlope.Minimum = 0;
             this.trackBassSlope.MouseWheelBarPartitions = 10;
@@ -385,7 +503,7 @@
             this.trackBrigtness.BackColor = System.Drawing.Color.Transparent;
             this.trackBrigtness.CustomBackground = false;
             this.trackBrigtness.LargeChange = ((uint)(5u));
-            this.trackBrigtness.Location = new System.Drawing.Point(129, 38);
+            this.trackBrigtness.Location = new System.Drawing.Point(129, 25);
             this.trackBrigtness.Maximum = 100;
             this.trackBrigtness.Minimum = 0;
             this.trackBrigtness.MouseWheelBarPartitions = 10;
@@ -405,7 +523,7 @@
             this.lblSamples.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblSamples.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblSamples.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblSamples.Location = new System.Drawing.Point(386, 154);
+            this.lblSamples.Location = new System.Drawing.Point(386, 120);
             this.lblSamples.Name = "lblSamples";
             this.lblSamples.Size = new System.Drawing.Size(23, 19);
             this.lblSamples.Style = MetroFramework.MetroColorStyle.Blue;
@@ -422,7 +540,7 @@
             this.label10.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.label10.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.label10.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.label10.Location = new System.Drawing.Point(40, 154);
+            this.label10.Location = new System.Drawing.Point(40, 120);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(83, 19);
             this.label10.Style = MetroFramework.MetroColorStyle.Blue;
@@ -439,7 +557,7 @@
             this.lblMSlope.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblMSlope.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblMSlope.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblMSlope.Location = new System.Drawing.Point(386, 116);
+            this.lblMSlope.Location = new System.Drawing.Point(386, 89);
             this.lblMSlope.Name = "lblMSlope";
             this.lblMSlope.Size = new System.Drawing.Size(33, 19);
             this.lblMSlope.Style = MetroFramework.MetroColorStyle.Blue;
@@ -456,7 +574,7 @@
             this.lblBSlope.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblBSlope.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblBSlope.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblBSlope.Location = new System.Drawing.Point(386, 78);
+            this.lblBSlope.Location = new System.Drawing.Point(386, 58);
             this.lblBSlope.Name = "lblBSlope";
             this.lblBSlope.Size = new System.Drawing.Size(33, 19);
             this.lblBSlope.Style = MetroFramework.MetroColorStyle.Blue;
@@ -473,7 +591,7 @@
             this.lblBrightness.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblBrightness.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblBrightness.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblBrightness.Location = new System.Drawing.Point(386, 40);
+            this.lblBrightness.Location = new System.Drawing.Point(386, 27);
             this.lblBrightness.Name = "lblBrightness";
             this.lblBrightness.Size = new System.Drawing.Size(39, 19);
             this.lblBrightness.Style = MetroFramework.MetroColorStyle.Blue;
@@ -490,7 +608,7 @@
             this.label5.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.label5.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.label5.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.label5.Location = new System.Drawing.Point(19, 116);
+            this.label5.Location = new System.Drawing.Point(19, 89);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 19);
             this.label5.Style = MetroFramework.MetroColorStyle.Blue;
@@ -507,7 +625,7 @@
             this.label4.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.label4.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.label4.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.label4.Location = new System.Drawing.Point(17, 78);
+            this.label4.Location = new System.Drawing.Point(17, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 19);
             this.label4.Style = MetroFramework.MetroColorStyle.Blue;
@@ -524,7 +642,7 @@
             this.label3.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.label3.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.label3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.label3.Location = new System.Drawing.Point(52, 40);
+            this.label3.Location = new System.Drawing.Point(52, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 19);
             this.label3.Style = MetroFramework.MetroColorStyle.Blue;
@@ -855,6 +973,12 @@
         private MetroFramework.Controls.MetroTrackBar trackBrigtness;
         private MetroFramework.Controls.MetroTrackBar trackSamples;
         private MetroFramework.Controls.MetroTrackBar trackMidSlope;
+        private MetroFramework.Controls.MetroLabel lblMidVol;
+        private MetroFramework.Controls.MetroLabel lblBassVol;
+        private MetroFramework.Controls.MetroTrackBar trackMidVol;
+        private MetroFramework.Controls.MetroTrackBar trackBassVol;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
     }
 }
 

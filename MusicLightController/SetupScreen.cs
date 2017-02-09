@@ -81,6 +81,8 @@ namespace MusicLightController
                 _config.OutputDriverName = string.Empty;
                 _config.MetroTheme = (byte)MetroThemeStyle.Light;
                 _config.MetroColor = (byte)MetroColorStyle.Yellow;
+                _config.BassVolume = 1.0f;
+                _config.MidVolume = 1.0f;
 
                 _config.Write(_configFile);
             }
@@ -139,12 +141,16 @@ namespace MusicLightController
                 trackBassSlope.Value = (int)Math.Round(_config.BassSlopeValue * ((float)trackBassSlope.Maximum / 10.0f), 2);
                 trackMidSlope.Value = (int)Math.Round(_config.MidSlopeValue * ((float)trackMidSlope.Maximum / 10.0f), 2);
                 trackSamples.Value = _config.SamplesPerSecond;
+                trackBassVol.Value = (int)Math.Round(_config.BassVolume * ((float)trackBassVol.Maximum / 2.0f), 2);
+                trackMidVol.Value = (int)Math.Round(_config.MidVolume * ((float)trackMidVol.Maximum / 2.0f), 2);
 
                 //Load value label texts
                 lblBrightness.Text = ((int)Math.Floor(_config.Brightness * 100.0f)).ToString() + "%";
                 lblBSlope.Text = _config.BassSlopeValue.ToString().Replace(',', '.');
                 lblMSlope.Text = _config.MidSlopeValue.ToString().Replace(',', '.');
                 lblSamples.Text = _config.SamplesPerSecond.ToString();
+                lblBassVol.Text = Math.Round(_config.BassVolume, 2).ToString().Replace(',', '.');
+                lblMidVol.Text = Math.Round(_config.MidVolume, 2).ToString().Replace(',', '.'); 
 
                 //Load the checkbox
                 cbInToOut.Checked = _config.MirrorSound;
@@ -367,6 +373,20 @@ namespace MusicLightController
             _config.MirrorSound = cbInToOut.Checked;
 
             StartSoundProcessor();
+        }
+
+        private void trackBassVol_Scroll(object sender, ScrollEventArgs e)
+        {
+            _config.BassVolume = (float)trackBassVol.Value / 100.0f;
+
+            lblBassVol.Text = Math.Round(_config.BassVolume, 2).ToString().Replace(',', '.');
+        }
+
+        private void trackMidVol_Scroll(object sender, ScrollEventArgs e)
+        {
+            _config.MidVolume = (float)trackMidVol.Value / 100.0f;
+
+            lblMidVol.Text = Math.Round(_config.MidVolume, 2).ToString().Replace(',', '.');
         }
         #endregion
 
@@ -682,6 +702,9 @@ namespace MusicLightController
         float[] spectrumL = new float[SPECTRUMSIZE];
         float[] spectrumR = new float[SPECTRUMSIZE];
 
+        int _lastSentBass = 0;
+        int _lastSentMid = 0;
+
         //Used to make sure the LEDs pulse even when the sound "seems" stable -> gives a nice pulse on the BPM (not 100% accurate but better than nothing)
         private float Mix(float x1, float x2, float y1, float y2, float x)
         {
@@ -741,6 +764,7 @@ namespace MusicLightController
                                 bassSum += (spectrumL[i] + spectrumR[i]) * ((float)SPECTRUMSIZE / (128.0f));
                             }
                             bassSum /= (((float)SPECTRUMSIZE / midStart) * 4.5f); //Create and average
+                            bassSum *= _config.BassVolume;
 
                             //Zero the sound values and do the mid range calculations
                             left_sum = right_sum = soundSum = 0.0f;
@@ -753,7 +777,7 @@ namespace MusicLightController
                             }
                             left_sum /= 10f;
                             right_sum /= 10f;
-                            soundSum = (left_sum + right_sum) / 2.0f; //Sum the left and right to get the value for the mid range
+                            soundSum = (left_sum + right_sum) / 2.0f * _config.MidVolume; //Sum the left and right to get the value for the mid range
 
                             //Apply the pulsing effect by taking the last sample into account
                             _prevBass = Mix(0, 100, bassSum, _prevBass, 0);
@@ -769,7 +793,13 @@ namespace MusicLightController
                                 int bByte = Clamp((int)((bassSum * 250.0f) * _config.Brightness), 254, 0);
                                 int sByte = Clamp((int)((soundSum * 250.0f) * _config.Brightness), 254, 0);
 
-                                _serial.Write(new byte[] { (byte)(bByte), (byte)(sByte) }, 0, 2); //... and output them to the LED controller
+                                if (_lastSentBass != bByte || _lastSentMid != sByte)
+                                {
+                                    _lastSentBass = bByte;
+                                    _lastSentMid = sByte;
+
+                                    _serial.Write(new byte[] { (byte)(bByte), (byte)(sByte) }, 0, 2); //... and output them to the LED controller
+                                }
                             }
                         }
 
