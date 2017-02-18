@@ -515,6 +515,7 @@
             this.trackBrigtness.TabIndex = 12;
             this.trackBrigtness.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackBrigtness.Value = 100;
+            this.trackBrigtness.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackBrigtness_Scroll);
             // 
             // lblSamples
             // 
