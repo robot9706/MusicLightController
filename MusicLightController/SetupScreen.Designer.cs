@@ -79,11 +79,16 @@
             this.cbMetroStyle = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cbLedDriver = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.btnDriverSetup = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             this.trayMenu.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -260,7 +265,7 @@
             this.cpr.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.cpr.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.cpr.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.cpr.Location = new System.Drawing.Point(719, 456);
+            this.cpr.Location = new System.Drawing.Point(719, 470);
             this.cpr.Name = "cpr";
             this.cpr.Size = new System.Drawing.Size(117, 19);
             this.cpr.Style = MetroFramework.MetroColorStyle.Blue;
@@ -822,7 +827,7 @@
             this.groupBox4.ForeColor = System.Drawing.Color.Silver;
             this.groupBox4.Location = new System.Drawing.Point(397, 289);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(294, 174);
+            this.groupBox4.Size = new System.Drawing.Size(439, 102);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "UI";
@@ -835,7 +840,7 @@
             this.cbMetroColor.FontWeight = MetroFramework.MetroLinkWeight.Regular;
             this.cbMetroColor.FormattingEnabled = true;
             this.cbMetroColor.ItemHeight = 23;
-            this.cbMetroColor.Location = new System.Drawing.Point(65, 90);
+            this.cbMetroColor.Location = new System.Drawing.Point(146, 56);
             this.cbMetroColor.Name = "cbMetroColor";
             this.cbMetroColor.Size = new System.Drawing.Size(209, 29);
             this.cbMetroColor.Style = MetroFramework.MetroColorStyle.Blue;
@@ -852,7 +857,7 @@
             this.cbMetroStyle.FontWeight = MetroFramework.MetroLinkWeight.Regular;
             this.cbMetroStyle.FormattingEnabled = true;
             this.cbMetroStyle.ItemHeight = 23;
-            this.cbMetroStyle.Location = new System.Drawing.Point(65, 57);
+            this.cbMetroStyle.Location = new System.Drawing.Point(146, 23);
             this.cbMetroStyle.Name = "cbMetroStyle";
             this.cbMetroStyle.Size = new System.Drawing.Size(209, 29);
             this.cbMetroStyle.Style = MetroFramework.MetroColorStyle.Blue;
@@ -868,7 +873,7 @@
             this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.metroLabel3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel3.Location = new System.Drawing.Point(13, 94);
+            this.metroLabel3.Location = new System.Drawing.Point(94, 60);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(46, 19);
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
@@ -885,7 +890,7 @@
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.metroLabel2.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel2.Location = new System.Drawing.Point(20, 60);
+            this.metroLabel2.Location = new System.Drawing.Point(101, 26);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(39, 19);
             this.metroLabel2.Style = MetroFramework.MetroColorStyle.Blue;
@@ -895,10 +900,72 @@
             this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel2.UseStyleColors = false;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnDriverSetup);
+            this.groupBox5.Controls.Add(this.cbLedDriver);
+            this.groupBox5.Controls.Add(this.metroLabel7);
+            this.groupBox5.ForeColor = System.Drawing.Color.Silver;
+            this.groupBox5.Location = new System.Drawing.Point(397, 397);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(439, 66);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "LED driver";
+            // 
+            // cbLedDriver
+            // 
+            this.cbLedDriver.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLedDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLedDriver.FontSize = MetroFramework.MetroLinkSize.Medium;
+            this.cbLedDriver.FontWeight = MetroFramework.MetroLinkWeight.Regular;
+            this.cbLedDriver.FormattingEnabled = true;
+            this.cbLedDriver.ItemHeight = 23;
+            this.cbLedDriver.Location = new System.Drawing.Point(146, 23);
+            this.cbLedDriver.Name = "cbLedDriver";
+            this.cbLedDriver.Size = new System.Drawing.Size(209, 29);
+            this.cbLedDriver.Style = MetroFramework.MetroColorStyle.Blue;
+            this.cbLedDriver.StyleManager = this.metroStyleManager;
+            this.cbLedDriver.TabIndex = 15;
+            this.cbLedDriver.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.cbLedDriver.SelectedIndexChanged += new System.EventHandler(this.cbLedDriver_SelectedIndexChanged);
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.CustomBackground = false;
+            this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel7.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel7.Location = new System.Drawing.Point(92, 28);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(48, 19);
+            this.metroLabel7.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel7.StyleManager = this.metroStyleManager;
+            this.metroLabel7.TabIndex = 0;
+            this.metroLabel7.Text = "Driver:";
+            this.metroLabel7.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel7.UseStyleColors = false;
+            // 
+            // btnDriverSetup
+            // 
+            this.btnDriverSetup.Enabled = false;
+            this.btnDriverSetup.Highlight = false;
+            this.btnDriverSetup.Location = new System.Drawing.Point(361, 22);
+            this.btnDriverSetup.Name = "btnDriverSetup";
+            this.btnDriverSetup.Size = new System.Drawing.Size(75, 30);
+            this.btnDriverSetup.Style = MetroFramework.MetroColorStyle.Blue;
+            this.btnDriverSetup.StyleManager = null;
+            this.btnDriverSetup.TabIndex = 16;
+            this.btnDriverSetup.Text = "Setup";
+            this.btnDriverSetup.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.btnDriverSetup.Click += new System.EventHandler(this.btnDriverSetup_Click);
+            // 
             // SetupScreen
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(855, 483);
+            this.ClientSize = new System.Drawing.Size(855, 497);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -922,6 +989,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -980,6 +1049,10 @@
         private MetroFramework.Controls.MetroTrackBar trackBassVol;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private MetroFramework.Controls.MetroComboBox cbLedDriver;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroButton btnDriverSetup;
     }
 }
 

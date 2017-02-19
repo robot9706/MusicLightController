@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,37 @@ namespace MusicLightController
     public partial class SetupScreen : MetroForm
     {
         #region Vars
+        public ConfigFile Config
+        {
+            get { return _config; }
+        }
+
+        public SerialPort DriverSerial
+        {
+            get { return _serial; }
+        }
+
+        private bool _updateSoundDataProps = false;
+        public bool UpdateSoundDataProps
+        {
+            get { return _updateSoundDataProps; }
+            set { _updateSoundDataProps = value; }
+        }
+
+        private byte _bassSoundValue;
+        public byte BassSoundValue
+        {
+            get { return _bassSoundValue; }
+            set { _bassSoundValue = value; }
+        }
+
+        private byte _midSoundValue;
+        public byte MidSoundValue
+        {
+            get { return _midSoundValue; }
+            set { _midSoundValue = value; }
+        }
+
         private ConfigFile _config;
         private string _configFile;
 
@@ -154,6 +186,8 @@ namespace MusicLightController
 
                 //Load the checkbox
                 cbInToOut.Checked = _config.MirrorSound;
+
+                InitDrivers();
 
                 //Setup the FMOD system
                 _fmodLoading = true; //Used to prevent I/O comboboxes to update config
@@ -790,15 +824,17 @@ namespace MusicLightController
                             if (_serialValid && _serial != null)
                             {
                                 //Convert the sound values into byte ranges...
-                                int bByte = Clamp((int)((bassSum * 250.0f) * _config.Brightness), 254, 0);
-                                int sByte = Clamp((int)((soundSum * 250.0f) * _config.Brightness), 254, 0);
+                                int bByte = Clamp((int)(bassSum * 254.0f), 254, 0);
+                                int sByte = Clamp((int)(soundSum * 254.0f), 254, 0);
 
                                 if (_lastSentBass != bByte || _lastSentMid != sByte)
                                 {
                                     _lastSentBass = bByte;
                                     _lastSentMid = sByte;
 
-                                    _serial.Write(new byte[] { (byte)(bByte), (byte)(sByte) }, 0, 2); //... and output them to the LED controller
+                                    DriveLEDs((byte)bByte, (byte)sByte);
+
+                                    //_serial.Write(new byte[] { (byte)(bByte), (byte)(sByte) }, 0, 2); //... and output them to the LED controller
                                 }
                             }
                         }
@@ -818,6 +854,149 @@ namespace MusicLightController
                     //}
                 }
             }
+        }
+        #endregion
+
+        #region LED drivers
+        private bool _ledOutputEnable = true;
+
+        public bool LEDOuputEnable
+        {
+            get { return _ledOutputEnable; }
+            set { _ledOutputEnable = value; }
+        }
+
+        struct LEDDriverInfo
+        {
+            public string Name;
+            public Action<SetupScreen, byte, byte> DriverFunction;
+            public Type SetupForm;
+
+            public LEDDriverInfo(string name, Action<SetupScreen, byte, byte> driver, Type setup)
+            {
+                Name = name;
+                DriverFunction = driver;
+                SetupForm = setup;
+            }
+        }
+
+        struct RGBCachedData
+        {
+            public Color TopLeft;
+            public Color TopRight;
+            public Color BottomLeft;
+            public Color BottomRight;
+        }
+
+        private static List<LEDDriverInfo> _drivers = new List<LEDDriverInfo>()
+        {
+            new LEDDriverInfo("2 channel", new Action<SetupScreen, byte, byte>(LEDDriver_2Channel), null),
+            new LEDDriverInfo("RGB", new Action<SetupScreen, byte, byte>(LEDDriver_RGB), typeof(RGBSetupForm)),
+        };
+
+        public object CachedDriverData = null;
+
+        private void InitDrivers()
+        {
+            cbLedDriver.Items.Clear();
+            foreach(LEDDriverInfo inf in _drivers)
+            {
+                cbLedDriver.Items.Add(inf.Name);
+            }
+
+            if (_config.LEDDriver >= 0 && _config.LEDDriver < cbLedDriver.Items.Count)
+            {
+                cbLedDriver.SelectedIndex = _config.LEDDriver;
+            }
+            else
+            {
+                _config.LEDDriver = 0;
+                cbLedDriver.SelectedIndex = 0;
+            }
+        }
+
+        private static void LEDDriver_2Channel(SetupScreen scr, byte bass, byte mid)
+        {
+            scr.DriverSerial.Write(new byte[] { (byte)(bass * scr.Config.Brightness), (byte)(mid * scr.Config.Brightness) }, 0, 2);
+        }
+
+        private static void LEDDriver_RGB(SetupScreen scr, byte bass, byte mid)
+        {
+            if (scr.CachedDriverData == null || !(scr.CachedDriverData is RGBCachedData))
+            {
+                if (!string.IsNullOrEmpty(scr.Config.LEDDriverConfig))
+                {
+                    if (scr.Config.LEDDriverConfig.StartsWith("cfgRGB"))
+                    {
+                        string[] data = scr.Config.LEDDriverConfig.Split('|');
+                        if (data.Length == 5)
+                        {
+                            RGBCachedData rb = new RGBCachedData();
+
+                            rb.TopLeft = Utils.ParseRGB(data[1]);
+                            rb.TopRight = Utils.ParseRGB(data[2]);
+                            rb.BottomLeft = Utils.ParseRGB(data[3]);
+                            rb.BottomRight = Utils.ParseRGB(data[4]);
+
+                            scr.CachedDriverData = rb;
+                        }
+                    }
+                }
+            }
+
+            if (scr.CachedDriverData != null && scr.CachedDriverData is RGBCachedData)
+            {
+                RGBCachedData rg = (RGBCachedData)scr.CachedDriverData;
+
+                float x = (float)Math.Pow(bass / (float)byte.MaxValue, 1.5f);
+                float y = (float)Math.Pow((byte.MaxValue - mid) / (float)byte.MaxValue, 1.5f);
+
+                Color c = Utils.BilinearInterpolation(rg.TopLeft, rg.BottomLeft, rg.TopRight, rg.BottomRight, x, y);
+
+                scr.DriverSerial.Write(new byte[] { 0x1, (byte)(c.R * scr.Config.Brightness), (byte)(c.G * scr.Config.Brightness), (byte)(c.B * scr.Config.Brightness) }, 0, 4);
+            }
+        }
+
+        private void cbLedDriver_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _config.LEDDriver = (byte)cbLedDriver.SelectedIndex;
+
+            btnDriverSetup.Enabled = (_drivers[_config.LEDDriver].SetupForm != null);
+        }
+
+        private void DriveLEDs(byte bass, byte mid)
+        {
+            if (_ledOutputEnable)
+            {
+                _drivers[_config.LEDDriver].DriverFunction(this, bass, mid);
+            }
+
+            if(_updateSoundDataProps)
+            {
+                _bassSoundValue = bass;
+                _midSoundValue = mid;
+            }
+        }
+
+        private void btnDriverSetup_Click(object sender, EventArgs e)
+        {
+            using (Form form = (Form)Activator.CreateInstance(_drivers[_config.LEDDriver].SetupForm))
+            {
+                form.ShowDialog(this);
+            }
+
+            CachedDriverData = null;
+            _ledOutputEnable = true;
+            _updateSoundDataProps = false;
+        }
+
+        public void ApplyMetroStyle(MetroForm form, MetroStyleManager mgr)
+        {
+            form.Theme = mgr.Theme = Theme;
+            form.Style = mgr.Style = Style;
+
+            mgr.UpdateOwnerForm();
+            form.Refresh();
         }
         #endregion
     }
