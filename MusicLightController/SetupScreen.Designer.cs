@@ -80,9 +80,9 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnDriverSetup = new MetroFramework.Controls.MetroButton();
             this.cbLedDriver = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            this.btnDriverSetup = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             this.trayMenu.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -381,7 +381,7 @@
             this.trackMidVol.Location = new System.Drawing.Point(129, 180);
             this.trackMidVol.Maximum = 200;
             this.trackMidVol.Minimum = 1;
-            this.trackMidVol.MouseWheelBarPartitions = 10;
+            this.trackMidVol.MouseWheelBarPartitions = 100;
             this.trackMidVol.Name = "trackMidVol";
             this.trackMidVol.Size = new System.Drawing.Size(251, 23);
             this.trackMidVol.SmallChange = ((uint)(1u));
@@ -390,7 +390,7 @@
             this.trackMidVol.TabIndex = 19;
             this.trackMidVol.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackMidVol.Value = 100;
-            this.trackMidVol.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackMidVol_Scroll);
+            this.trackMidVol.ValueChanged += new System.EventHandler(this.trackMidVol_ValueChanged);
             // 
             // trackBassVol
             // 
@@ -400,7 +400,7 @@
             this.trackBassVol.Location = new System.Drawing.Point(129, 149);
             this.trackBassVol.Maximum = 200;
             this.trackBassVol.Minimum = 1;
-            this.trackBassVol.MouseWheelBarPartitions = 10;
+            this.trackBassVol.MouseWheelBarPartitions = 100;
             this.trackBassVol.Name = "trackBassVol";
             this.trackBassVol.Size = new System.Drawing.Size(251, 23);
             this.trackBassVol.SmallChange = ((uint)(1u));
@@ -409,7 +409,7 @@
             this.trackBassVol.TabIndex = 18;
             this.trackBassVol.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackBassVol.Value = 100;
-            this.trackBassVol.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackBassVol_Scroll);
+            this.trackBassVol.ValueChanged += new System.EventHandler(this.trackBassVol_ValueChanged);
             // 
             // metroLabel5
             // 
@@ -453,7 +453,7 @@
             this.trackSamples.Location = new System.Drawing.Point(129, 118);
             this.trackSamples.Maximum = 100;
             this.trackSamples.Minimum = 0;
-            this.trackSamples.MouseWheelBarPartitions = 10;
+            this.trackSamples.MouseWheelBarPartitions = 100;
             this.trackSamples.Name = "trackSamples";
             this.trackSamples.Size = new System.Drawing.Size(251, 23);
             this.trackSamples.SmallChange = ((uint)(1u));
@@ -462,7 +462,7 @@
             this.trackSamples.TabIndex = 15;
             this.trackSamples.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackSamples.Value = 30;
-            this.trackSamples.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackSamples_Scroll);
+            this.trackSamples.ValueChanged += new System.EventHandler(this.trackSamples_ValueChanged);
             // 
             // trackMidSlope
             // 
@@ -472,7 +472,7 @@
             this.trackMidSlope.Location = new System.Drawing.Point(129, 87);
             this.trackMidSlope.Maximum = 1000;
             this.trackMidSlope.Minimum = 0;
-            this.trackMidSlope.MouseWheelBarPartitions = 10;
+            this.trackMidSlope.MouseWheelBarPartitions = 1000;
             this.trackMidSlope.Name = "trackMidSlope";
             this.trackMidSlope.Size = new System.Drawing.Size(251, 23);
             this.trackMidSlope.SmallChange = ((uint)(1u));
@@ -481,7 +481,7 @@
             this.trackMidSlope.TabIndex = 14;
             this.trackMidSlope.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackMidSlope.Value = 50;
-            this.trackMidSlope.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackMidSlope_Scroll);
+            this.trackMidSlope.ValueChanged += new System.EventHandler(this.trackMidSlope_ValueChanged);
             // 
             // trackBassSlope
             // 
@@ -491,7 +491,7 @@
             this.trackBassSlope.Location = new System.Drawing.Point(129, 56);
             this.trackBassSlope.Maximum = 1000;
             this.trackBassSlope.Minimum = 0;
-            this.trackBassSlope.MouseWheelBarPartitions = 10;
+            this.trackBassSlope.MouseWheelBarPartitions = 1000;
             this.trackBassSlope.Name = "trackBassSlope";
             this.trackBassSlope.Size = new System.Drawing.Size(251, 23);
             this.trackBassSlope.SmallChange = ((uint)(1u));
@@ -501,7 +501,7 @@
             this.trackBassSlope.Text = "metroTrackBar2";
             this.trackBassSlope.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackBassSlope.Value = 50;
-            this.trackBassSlope.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackBassSlope_Scroll);
+            this.trackBassSlope.ValueChanged += new System.EventHandler(this.trackBassSlope_ValueChanged);
             // 
             // trackBrigtness
             // 
@@ -511,7 +511,7 @@
             this.trackBrigtness.Location = new System.Drawing.Point(129, 25);
             this.trackBrigtness.Maximum = 100;
             this.trackBrigtness.Minimum = 0;
-            this.trackBrigtness.MouseWheelBarPartitions = 10;
+            this.trackBrigtness.MouseWheelBarPartitions = 100;
             this.trackBrigtness.Name = "trackBrigtness";
             this.trackBrigtness.Size = new System.Drawing.Size(251, 23);
             this.trackBrigtness.SmallChange = ((uint)(1u));
@@ -520,7 +520,7 @@
             this.trackBrigtness.TabIndex = 12;
             this.trackBrigtness.Theme = MetroFramework.MetroThemeStyle.Light;
             this.trackBrigtness.Value = 100;
-            this.trackBrigtness.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackBrigtness_Scroll);
+            this.trackBrigtness.ValueChanged += new System.EventHandler(this.trackBrigtness_ValueChanged);
             // 
             // lblSamples
             // 
@@ -913,6 +913,20 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "LED driver";
             // 
+            // btnDriverSetup
+            // 
+            this.btnDriverSetup.Enabled = false;
+            this.btnDriverSetup.Highlight = false;
+            this.btnDriverSetup.Location = new System.Drawing.Point(361, 22);
+            this.btnDriverSetup.Name = "btnDriverSetup";
+            this.btnDriverSetup.Size = new System.Drawing.Size(75, 30);
+            this.btnDriverSetup.Style = MetroFramework.MetroColorStyle.Blue;
+            this.btnDriverSetup.StyleManager = this.metroStyleManager;
+            this.btnDriverSetup.TabIndex = 16;
+            this.btnDriverSetup.Text = "Setup";
+            this.btnDriverSetup.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.btnDriverSetup.Click += new System.EventHandler(this.btnDriverSetup_Click);
+            // 
             // cbLedDriver
             // 
             this.cbLedDriver.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -946,20 +960,6 @@
             this.metroLabel7.Text = "Driver:";
             this.metroLabel7.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel7.UseStyleColors = false;
-            // 
-            // btnDriverSetup
-            // 
-            this.btnDriverSetup.Enabled = false;
-            this.btnDriverSetup.Highlight = false;
-            this.btnDriverSetup.Location = new System.Drawing.Point(361, 22);
-            this.btnDriverSetup.Name = "btnDriverSetup";
-            this.btnDriverSetup.Size = new System.Drawing.Size(75, 30);
-            this.btnDriverSetup.Style = MetroFramework.MetroColorStyle.Blue;
-            this.btnDriverSetup.StyleManager = null;
-            this.btnDriverSetup.TabIndex = 16;
-            this.btnDriverSetup.Text = "Setup";
-            this.btnDriverSetup.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.btnDriverSetup.Click += new System.EventHandler(this.btnDriverSetup_Click);
             // 
             // SetupScreen
             // 

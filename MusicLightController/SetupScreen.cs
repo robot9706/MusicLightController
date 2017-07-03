@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Components;
 using MetroFramework.Forms;
+using MusicLightController.Drivers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,7 +78,6 @@ namespace MusicLightController
         private Thread _soundProcThread;
 
         private const int OUTPUTRATE = 48000;
-        private const int SPECTRUMSIZE = 8192;
         #endregion
 
         #region UI
@@ -326,25 +326,31 @@ namespace MusicLightController
             settingsToolStripMenuItem_Click(sender, e); //Show the form using the settings context menu button
         }
 
-        private void trackBrigtness_Scroll(object sender, ScrollEventArgs e)
+        private void trackBrigtness_ValueChanged(object sender, EventArgs e)
         {
             _config.Brightness = trackBrigtness.Value / (float)trackBrigtness.Maximum;
             lblBrightness.Text = ((int)Math.Floor(_config.Brightness * 100.0f)).ToString() + "%";
         }
 
-        private void trackBassSlope_Scroll(object sender, ScrollEventArgs e)
+        private void trackSamples_Scroll(object sender, ScrollEventArgs e)
+        {
+            _config.SamplesPerSecond = (ushort)trackSamples.Value;
+            lblSamples.Text = _config.SamplesPerSecond.ToString();
+        }
+
+        private void trackBassSlope_ValueChanged(object sender, EventArgs e)
         {
             _config.BassSlopeValue = trackBassSlope.Value / ((float)trackBassSlope.Maximum / 10.0f);
             lblBSlope.Text = _config.BassSlopeValue.ToString().Replace(',', '.');
         }
 
-        private void trackMidSlope_Scroll(object sender, ScrollEventArgs e)
+        private void trackMidSlope_ValueChanged(object sender, EventArgs e)
         {
             _config.MidSlopeValue = trackMidSlope.Value / ((float)trackMidSlope.Maximum / 10.0f);
             lblMSlope.Text = _config.MidSlopeValue.ToString().Replace(',', '.');
         }
 
-        private void trackSamples_Scroll(object sender, ScrollEventArgs e)
+        private void trackSamples_ValueChanged(object sender, EventArgs e)
         {
             _config.SamplesPerSecond = (ushort)trackSamples.Value;
             lblSamples.Text = _config.SamplesPerSecond.ToString();
@@ -409,14 +415,14 @@ namespace MusicLightController
             StartSoundProcessor();
         }
 
-        private void trackBassVol_Scroll(object sender, ScrollEventArgs e)
+        private void trackBassVol_ValueChanged(object sender, EventArgs e)
         {
             _config.BassVolume = (float)trackBassVol.Value / 100.0f;
 
             lblBassVol.Text = Math.Round(_config.BassVolume, 2).ToString().Replace(',', '.');
         }
 
-        private void trackMidVol_Scroll(object sender, ScrollEventArgs e)
+        private void trackMidVol_ValueChanged(object sender, EventArgs e)
         {
             _config.MidVolume = (float)trackMidVol.Value / 100.0f;
 
@@ -684,6 +690,9 @@ namespace MusicLightController
 
                 _serialValid = true;
                 UpdateSerialPortStatus("Opened");
+
+                _drivers[_config.LEDDriver].End(this);
+                _drivers[_config.LEDDriver].Start(this);
             }
             catch (Exception ex)
             {
@@ -730,6 +739,8 @@ namespace MusicLightController
 
         #region Sound processor
         //Processor vars
+        private const int SPECTRUMSIZE = 8192; //8192
+
         float _prevBass = 0.0f;
         float _prevSound = 0.0f;
 
@@ -775,7 +786,7 @@ namespace MusicLightController
                 if (system != null)
                     system.update(); //Update the FMOD system
 
-                int targetTime = (1000 / (_config.SamplesPerSecond <= 0 ? 30 : _config.SamplesPerSecond)); //Calculate the time for one sample
+                int targetTime = (1000 / (_config.SamplesPerSecond <= 0 ? 1 : _config.SamplesPerSecond)); //Calculate the time for one sample
 
                 try
                 {
@@ -797,7 +808,7 @@ namespace MusicLightController
                             {
                                 bassSum += (spectrumL[i] + spectrumR[i]) * ((float)SPECTRUMSIZE / (128.0f));
                             }
-                            bassSum /= (((float)SPECTRUMSIZE / midStart) * 4.5f); //Create and average
+                            bassSum /= (((float)SPECTRUMSIZE / midStart) * 4.5f); //Create and average // *4.5f
                             bassSum *= _config.BassVolume;
 
                             //Zero the sound values and do the mid range calculations
@@ -866,32 +877,11 @@ namespace MusicLightController
             set { _ledOutputEnable = value; }
         }
 
-        struct LEDDriverInfo
+        private static List<LedDriver> _drivers = new List<LedDriver>()
         {
-            public string Name;
-            public Action<SetupScreen, byte, byte> DriverFunction;
-            public Type SetupForm;
-
-            public LEDDriverInfo(string name, Action<SetupScreen, byte, byte> driver, Type setup)
-            {
-                Name = name;
-                DriverFunction = driver;
-                SetupForm = setup;
-            }
-        }
-
-        struct RGBCachedData
-        {
-            public Color TopLeft;
-            public Color TopRight;
-            public Color BottomLeft;
-            public Color BottomRight;
-        }
-
-        private static List<LEDDriverInfo> _drivers = new List<LEDDriverInfo>()
-        {
-            new LEDDriverInfo("2 channel", new Action<SetupScreen, byte, byte>(LEDDriver_2Channel), null),
-            new LEDDriverInfo("RGB", new Action<SetupScreen, byte, byte>(LEDDriver_RGB), typeof(RGBSetupForm)),
+            new RGBDriver(),
+            new TwoChannelNew(),
+            new TwoChannelOld()
         };
 
         public object CachedDriverData = null;
@@ -899,9 +889,9 @@ namespace MusicLightController
         private void InitDrivers()
         {
             cbLedDriver.Items.Clear();
-            foreach(LEDDriverInfo inf in _drivers)
+            foreach(LedDriver inf in _drivers)
             {
-                cbLedDriver.Items.Add(inf.Name);
+                cbLedDriver.Items.Add(inf.GetName());
             }
 
             if (_config.LEDDriver >= 0 && _config.LEDDriver < cbLedDriver.Items.Count)
@@ -915,60 +905,24 @@ namespace MusicLightController
             }
         }
 
-        private static void LEDDriver_2Channel(SetupScreen scr, byte bass, byte mid)
-        {
-            scr.DriverSerial.Write(new byte[] { (byte)(bass * scr.Config.Brightness), (byte)(mid * scr.Config.Brightness) }, 0, 2);
-        }
-
-        private static void LEDDriver_RGB(SetupScreen scr, byte bass, byte mid)
-        {
-            if (scr.CachedDriverData == null || !(scr.CachedDriverData is RGBCachedData))
-            {
-                if (!string.IsNullOrEmpty(scr.Config.LEDDriverConfig))
-                {
-                    if (scr.Config.LEDDriverConfig.StartsWith("cfgRGB"))
-                    {
-                        string[] data = scr.Config.LEDDriverConfig.Split('|');
-                        if (data.Length == 5)
-                        {
-                            RGBCachedData rb = new RGBCachedData();
-
-                            rb.TopLeft = Utils.ParseRGB(data[1]);
-                            rb.TopRight = Utils.ParseRGB(data[2]);
-                            rb.BottomLeft = Utils.ParseRGB(data[3]);
-                            rb.BottomRight = Utils.ParseRGB(data[4]);
-
-                            scr.CachedDriverData = rb;
-                        }
-                    }
-                }
-            }
-
-            if (scr.CachedDriverData != null && scr.CachedDriverData is RGBCachedData)
-            {
-                RGBCachedData rg = (RGBCachedData)scr.CachedDriverData;
-
-                float x = (float)Math.Pow(bass / (float)byte.MaxValue, 1.5f);
-                float y = (float)Math.Pow((byte.MaxValue - mid) / (float)byte.MaxValue, 1.5f);
-
-                Color c = Utils.BilinearInterpolation(rg.TopLeft, rg.BottomLeft, rg.TopRight, rg.BottomRight, x, y);
-
-                scr.DriverSerial.Write(new byte[] { 0x1, (byte)(c.R * scr.Config.Brightness), (byte)(c.G * scr.Config.Brightness), (byte)(c.B * scr.Config.Brightness) }, 0, 4);
-            }
-        }
-
         private void cbLedDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _config.LEDDriver = (byte)cbLedDriver.SelectedIndex;
+            if (_config.LEDDriver >= 0 && _config.LEDDriver < _drivers.Count)
+            {
+                _drivers[_config.LEDDriver].End(this);
+            }
 
-            btnDriverSetup.Enabled = (_drivers[_config.LEDDriver].SetupForm != null);
+            _config.LEDDriver = (byte)cbLedDriver.SelectedIndex;
+            _drivers[_config.LEDDriver].Start(this);
+
+            btnDriverSetup.Enabled = (_drivers[_config.LEDDriver].GetSetupForm() != null);
         }
 
         private void DriveLEDs(byte bass, byte mid)
         {
             if (_ledOutputEnable)
             {
-                _drivers[_config.LEDDriver].DriverFunction(this, bass, mid);
+                _drivers[_config.LEDDriver].DoDriver(this, bass, mid);
             }
 
             if(_updateSoundDataProps)
@@ -980,7 +934,7 @@ namespace MusicLightController
 
         private void btnDriverSetup_Click(object sender, EventArgs e)
         {
-            using (Form form = (Form)Activator.CreateInstance(_drivers[_config.LEDDriver].SetupForm))
+            using (Form form = _drivers[_config.LEDDriver].GetSetupForm())
             {
                 form.ShowDialog(this);
             }

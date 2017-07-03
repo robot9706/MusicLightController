@@ -53,10 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFile.cs" />
+    <Compile Include="Drivers\RGBDriver.cs" />
+    <Compile Include="Drivers\TwoChannelNew.cs" />
+    <Compile Include="Drivers\TwoChannelOld.cs" />
     <Compile Include="FMODWrapper\fmod.cs" />
     <Compile Include="FMODWrapper\fmod_dsp.cs" />
     <Compile Include="FMODWrapper\fmod_errors.cs" />
     <Compile Include="FMODWrapper\fmod_memoryinfo.cs" />
+    <Compile Include="LedDriver.cs" />
     <Compile Include="RGBSetupForm.cs">
       <SubType>Form</SubType>
     </Compile>
